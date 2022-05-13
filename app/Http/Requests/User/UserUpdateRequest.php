@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Car;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Dto\Car\CarUpdateDto;
+use App\Dto\User\UserUpdateDto;
 
-class CarUpdateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,17 +17,13 @@ class CarUpdateRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
             'id' => 'required|exists:App\Models\Car,id',
-            'name' => 'nullable|string',
-            'userId' => 'nullable|exists:App\Models\User,id'
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255|unique:users',
+            'password' => 'nullable|string|min:8',
         ];
     }
 
@@ -36,12 +32,13 @@ class CarUpdateRequest extends FormRequest
         $this->merge(['id' => $this->route('id')]);
     }
 
-    public function getDto(): CarUpdateDto
+    public function getDto(): UserUpdateDto
     {
-        return new CarUpdateDto(
+        return new UserUpdateDto(
             $this->id,
             $this->get('name'), 
-            $this->get('userId'),
+            $this->get('email'),
+            $this->get('password'),
         );
     }
 }

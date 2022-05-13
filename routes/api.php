@@ -29,3 +29,15 @@ Route::delete('/cars/{id}', [Controllers\CarsController::class, 'delete'])
     ->name('cars.delete');
 Route::patch('/cars/{id}', [Controllers\CarsController::class, 'update'])
     ->name('cars.update');
+
+
+Route::get('/users', [Controllers\UsersController::class, 'list'])
+    ->name('users.list');
+Route::get('/users/{id}', [Controllers\UsersController::class, 'find'])
+    ->name('users.find');
+Route::post('/users', [Controllers\UsersController::class, 'create'])
+    ->name('users.create');
+Route::delete('/users/{id}', [Controllers\UsersController::class, 'delete'])
+    ->name('users.delete');
+Route::patch('/users/{id}', [Controllers\UsersController::class, 'update'])
+    ->name('users.update');

@@ -14,7 +14,7 @@ final class CarUpdateDto
     private $id;
     
     public function __construct(
-        $id, string $name, bool $userId = null)
+        $id, $name, $userId = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -26,7 +26,7 @@ final class CarUpdateDto
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }

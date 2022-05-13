@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Car;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Dto\Car\CarUpdateDto;
+use App\Dto\User\UserDeleteDto;
 
-class CarUpdateRequest extends FormRequest
+class UserDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,7 @@ class CarUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:App\Models\Car,id',
-            'name' => 'nullable|string',
-            'userId' => 'nullable|exists:App\Models\User,id'
+            'id' => 'required|exists:App\Models\User,id'
         ];
     }
 
@@ -36,12 +34,10 @@ class CarUpdateRequest extends FormRequest
         $this->merge(['id' => $this->route('id')]);
     }
 
-    public function getDto(): CarUpdateDto
+    public function getDto(): UserDeleteDto
     {
-        return new CarUpdateDto(
+        return new UserDeleteDto(
             $this->id,
-            $this->get('name'), 
-            $this->get('userId'),
         );
     }
 }

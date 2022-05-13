@@ -59,11 +59,13 @@ final class CarService
         $id = $request->getId();
 
         $car = Car::find($id);
-        $car->name = $request->getName();
+        $car->name = $request->getName()??$car->name;
 
         if (!empty($reques->userId)) {
             return $this->addUser($car, $reques->userId);
         }
+
+        $car->saveOrFail();
 
         return $car;
     }

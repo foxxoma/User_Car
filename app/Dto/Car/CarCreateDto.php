@@ -11,7 +11,7 @@ final class CarCreateDto
     private $userId;
     
     public function __construct(
-        string $name, bool $userId = null)
+        string $name, $userId = null)
     {
         $this->name = $name;
         $this->userId = $userId;
