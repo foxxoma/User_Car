@@ -14,7 +14,7 @@ final class CarUpdateDto
     private $id;
     
     public function __construct(
-        $id, $name, $userId = null)
+        $id, $name, $userId)
     {
         $this->id = $id;
         $this->name = $name;

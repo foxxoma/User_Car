@@ -4,6 +4,7 @@ namespace App\Services\Car;
 
 use App\Models\Car;
 use App\Models\User;
+use App\Helpers\CarHelper;
 use App\Dto\Car\CarCreateDto;
 use App\Dto\Car\CarDeleteDto;
 use App\Dto\Car\CarUpdateDto;
@@ -35,11 +36,11 @@ final class CarService
         $car = new Car();
         $car->name = $request->getName();
 
-        if (!empty($reques->userId)) {
-            return $this->addUser($car, $reques->userId);
-        }
-
         $car->saveOrFail();
+
+        if (!empty($request->getUserId())) {
+            return $this->addUser($car, $request->getUserId());
+        }
 
         return $car;
     }
@@ -61,8 +62,8 @@ final class CarService
         $car = Car::find($id);
         $car->name = $request->getName()??$car->name;
 
-        if (!empty($reques->userId)) {
-            return $this->addUser($car, $reques->userId);
+        if (!empty($request->getUserId())) {
+            return $this->addUser($car, $request->getUserId());
         }
 
         $car->saveOrFail();
@@ -72,11 +73,6 @@ final class CarService
 
     public function addUser(Car $car, $userId)
     {
-        $user = User::find($userId);
-
-        if (empty($user->car))
-            throw new \Exception("Car not free");
-
-        return $user->car()->save($car);
+        return CarHelper::changeUserCar($userId, $car->id);
     }
 }
