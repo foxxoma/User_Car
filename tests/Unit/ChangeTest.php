@@ -64,6 +64,7 @@ class ChangeTest extends TestCase
                 'test-name2',
                 $user->id
             ));
+            $this->assertEquals('test-name2', $car1->name);
             $this->assertEquals($car1->user_id, $user->id);
 
             $car2 = $carService->find(new CarFindDto(
