@@ -41,3 +41,6 @@ Route::delete('/users/{id}', [Controllers\UsersController::class, 'delete'])
     ->name('users.delete');
 Route::patch('/users/{id}', [Controllers\UsersController::class, 'update'])
     ->name('users.update');
+
+Route::patch('/change/car/{carId}/user/{userId}', [Controllers\ChangeController::class, 'change'])
+    ->name('change.change');

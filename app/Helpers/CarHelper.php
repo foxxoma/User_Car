@@ -7,7 +7,7 @@ use App\Models\User;
 
 class CarHelper
 {
-    public static function changeUserCar($userId, $carId)
+    public static function changeUserCar($userId, $carId) : Car
     {
         $user = User::find($userId);
         $car = Car::find($carId);
